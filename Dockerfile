@@ -7,7 +7,7 @@ FROM caddy:2.11.7 AS caddy
 FROM ghcr.io/milind-soni/openmausbot:v0.1.134
 USER root
 # tini reaps the exited Chrome helpers the bots' browsers leave behind (upstream's `init: true`);
-# Railway runs no init of its own.
+# On Railway tini is not PID 1, so it runs as a child subreaper (-s) to still collect them.
 RUN apt-get update \
   && apt-get install -y --no-install-recommends tini \
   && rm -rf /var/lib/apt/lists/* \
@@ -30,5 +30,5 @@ COPY railway-entrypoint.sh /usr/local/bin/railway-entrypoint.sh
 RUN chmod 0755 /usr/local/bin/railway-entrypoint.sh \
   && caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
 # Starts as root only to hand Railway's root-owned volume to `maus`, then drops to it.
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/railway-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/tini", "-s", "--", "/usr/local/bin/railway-entrypoint.sh"]
 CMD []
