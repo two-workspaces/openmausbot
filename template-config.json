@@ -1,0 +1,62 @@
+{
+  "buckets": {},
+  "services": {
+    "72790385-2265-450f-a3b3-7af85a760b38": {
+      "icon": "https://raw.githubusercontent.com/milind-soni/OpenMausBot/v0.1.134/public/app-icon-512.png",
+      "name": "OpenMausBot",
+      "source": {
+        "image": "ghcr.io/two-workspaces/openmausbot:IMAGE_TAG"
+      },
+      "deploy": {
+        "healthcheckPath": "/api/health",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "variables": {
+        "OMB_SIGNIN_EMAILS": {
+          "isOptional": false,
+          "description": "Your email address (comma-separate several, or @yourcompany.com for a whole domain). They sign in at /pair with an emailed code and get full access.",
+          "defaultValue": ""
+        },
+        "OMB_SIGNIN_MEMBER_EMAILS": {
+          "isOptional": true,
+          "description": "Optional. Emails that may sign in for chat and approvals only, without settings or keys.",
+          "defaultValue": ""
+        },
+        "OMB_PUBLIC_URL": {
+          "isOptional": false,
+          "description": "Public address used in pairing links. Change it to https://your-domain after adding a custom domain.",
+          "defaultValue": "https://${{RAILWAY_PUBLIC_DOMAIN}}"
+        },
+        "OMB_WEBHOOK_PUBLIC_URL": {
+          "isOptional": false,
+          "description": "Address printed in webhook URLs (/hooks/...). Keep it equal to OMB_PUBLIC_URL.",
+          "defaultValue": "${{OMB_PUBLIC_URL}}"
+        },
+        "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+          "isOptional": false,
+          "description": "Seconds a running deployment gets to finish bot turns before a redeploy replaces it.",
+          "defaultValue": "30"
+        },
+        "PORT": {
+          "isOptional": false,
+          "description": "Port of the web edge Railway routes to. Do not change.",
+          "defaultValue": "8080"
+        }
+      },
+      "networking": {
+        "serviceDomains": {
+          "<hasDomain>:8080": {
+            "port": 8080
+          }
+        },
+        "tcpProxies": {}
+      },
+      "volumeMounts": {
+        "55963b8c-abef-4480-beba-dcef86a5225e": {
+          "mountPath": "/data"
+        }
+      }
+    }
+  }
+}
