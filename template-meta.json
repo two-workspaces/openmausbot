@@ -5,5 +5,6 @@
   "category": "AI/ML",
   "image": "https://raw.githubusercontent.com/milind-soni/OpenMausBot/v0.1.134/public/app-icon-512.png",
   "card_desc": "OpenMausBot, the open-source Grok Bot alternative: a team of AI bots that run on your own Claude Code and Codex subscriptions, each with its own browser, memory and connected apps, with email sign-in and everything on a volume.",
-  "deploy_marker": "two-workspaces/openmausbot"
+  "deploy_marker": "two-workspaces/openmausbot",
+  "id": "43a84f7b-26b3-453a-856d-7c40dabe154a"
 }

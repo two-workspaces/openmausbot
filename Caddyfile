@@ -14,7 +14,9 @@
 	}
 }
 
-:{$PORT:8080} {
+# Not 8080: OpenMausBot polls 127.0.0.1:8080/v1 for a local oMLX model server
+# (server/drivers/local-inject.ts), and would find Caddy there.
+:{$PORT:8790} {
 	encode zstd gzip
 
 	# Webhook ingress has its own per-hook secrets and must be reachable by third parties.

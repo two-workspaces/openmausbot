@@ -41,13 +41,13 @@
         "PORT": {
           "isOptional": false,
           "description": "Port of the web edge Railway routes to. Do not change.",
-          "defaultValue": "8080"
+          "defaultValue": "8790"
         }
       },
       "networking": {
         "serviceDomains": {
-          "<hasDomain>:8080": {
-            "port": 8080
+          "<hasDomain>:8790": {
+            "port": 8790
           }
         },
         "tcpProxies": {}
