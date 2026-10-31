@@ -5,7 +5,7 @@
       "icon": "https://raw.githubusercontent.com/milind-soni/OpenMausBot/v0.1.134/public/app-icon-512.png",
       "name": "OpenMausBot",
       "source": {
-        "image": "ghcr.io/two-workspaces/openmausbot:039baee"
+        "image": "ghcr.io/two-workspaces/openmausbot:3b4ad9b"
       },
       "deploy": {
         "healthcheckPath": "/api/health",
