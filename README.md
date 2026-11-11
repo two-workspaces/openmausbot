@@ -36,7 +36,7 @@ Everything lives on the volume at `/data`: bots, chats, memory, engine logins an
 **First use:**
 
 1. Enter your email as `OMB_SIGNIN_EMAILS` when you deploy.
-2. Open the service's Railway domain. It shows the sign-in page: choose **Sign in with your email**, enter the code you receive, and the browser stays signed in.
+2. Open the service's Railway domain. It shows the sign-in page: choose **Sign in with email**, enter the code you receive, and the browser stays signed in.
 3. Go to **Settings → Engines**. **Claude Code**: "Sign in to Claude" opens Anthropic's sign-in and gives you a code to paste back. **Codex**: "Connect ChatGPT" shows a device code for OpenAI's page. Both CLIs are already installed.
 4. Create a bot and start chatting.
 
@@ -46,7 +46,7 @@ Prefer a pairing code? Open a shell with `railway ssh` and run:
 setpriv --reuid=maus --regid=maus --init-groups env HOME=/data node /app/dist-server/openmausbot.js pair --label "My browser"
 ```
 
-It prints a single-use code (valid five minutes) and a link to your domain. Add `--client` for a chat-only device.
+It prints a single-use code (valid ten minutes) and a link to your domain. Add `--client` for a chat-only device.
 
 **Settings:**
 

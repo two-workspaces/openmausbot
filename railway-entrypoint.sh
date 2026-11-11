@@ -17,6 +17,12 @@ while IFS= read -r -d '' kv; do
   case "${kv%%=*}" in HOME|PATH|USER|LOGNAME|SHELL) ;; *) keep+=("$kv") ;; esac
 done < <(env -0)
 
+# The data-directory lease names the container that wrote it. After a redeploy or a crash that
+# container is gone, and the server refuses to start on a lease "owned by a process on another
+# machine". A Railway volume attaches to one container, so a lease found at boot is stale;
+# upstream's own remedy is to delete it.
+rm -f /data/.openmausbot/openmausbot-server.lease
+
 cd /app
 as_maus node dist-server/server-launcher.js &
 server=$!
