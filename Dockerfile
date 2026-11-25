@@ -18,7 +18,7 @@ COPY --from=caddy /usr/bin/caddy /usr/local/bin/caddy
 # upgrade: npm @anthropic-ai/claude-code
 ARG CLAUDE_CODE_VERSION=2.1.331
 # upgrade: npm @openai/codex
-ARG CODEX_VERSION=0.167.0
+ARG CODEX_VERSION=0.172.0
 RUN HOME=/tmp/omb-build-home npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} @openai/codex@${CODEX_VERSION} \
   && rm -rf /tmp/omb-build-home /tmp/node-compile-cache
 # Railway doesn't create /.dockerenv. Without it agent-browser and OpenMausBot's Chrome launcher
@@ -27,6 +27,7 @@ RUN HOME=/tmp/omb-build-home npm install -g @anthropic-ai/claude-code@${CLAUDE_C
 RUN touch /.dockerenv
 COPY Caddyfile /etc/caddy/Caddyfile
 COPY railway-entrypoint.sh /usr/local/bin/railway-entrypoint.sh
+COPY --chmod=0755 codex-no-daemon /usr/local/bin/codex-no-daemon
 RUN chmod 0755 /usr/local/bin/railway-entrypoint.sh \
   && caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
 # Starts as root only to hand Railway's root-owned volume to `maus`, then drops to it.

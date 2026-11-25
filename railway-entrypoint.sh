@@ -23,6 +23,10 @@ done < <(env -0)
 # upstream's own remedy is to delete it.
 rm -f /data/.openmausbot/openmausbot-server.lease
 
+# Codex 0.168+ copies itself (~420 MB) into /data/.codex/packages on first start, which takes
+# about 1 GB of memory and gets it killed on a 0.5 GB service. Off unless the config says otherwise.
+as_maus codex-no-daemon /data/.codex/config.toml || echo "railway: could not write daemon_auto_start"
+
 cd /app
 as_maus node dist-server/server-launcher.js &
 server=$!
