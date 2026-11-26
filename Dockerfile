@@ -4,7 +4,7 @@
 # Caddy moves into this container and is the only thing on $PORT.
 FROM caddy:2.11.9 AS caddy
 
-FROM ghcr.io/milind-soni/openmausbot:v0.1.178
+FROM ghcr.io/milind-soni/openmausbot:v0.1.181
 USER root
 # tini reaps the exited Chrome helpers the bots' browsers leave behind (upstream's `init: true`);
 # On Railway tini is not PID 1, so it runs as a child subreaper (-s) to still collect them.
@@ -16,7 +16,7 @@ COPY --from=caddy /usr/bin/caddy /usr/local/bin/caddy
 # Engines baked in, so Settings -> Engines can sign them in straight away. Settings can also install
 # newer copies into the volume (<data dir>/tools/npm), which win on the bots' PATH.
 # upgrade: npm @anthropic-ai/claude-code
-ARG CLAUDE_CODE_VERSION=2.1.331
+ARG CLAUDE_CODE_VERSION=2.1.332
 # upgrade: npm @openai/codex
 ARG CODEX_VERSION=0.172.0
 RUN HOME=/tmp/omb-build-home npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} @openai/codex@${CODEX_VERSION} \
